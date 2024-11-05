@@ -1,27 +1,82 @@
+
+
+/* Contenedor principal del juego */
+h2 {
+  color: #333;
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+input[type="number"] {
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+  color: #333;
+  font-size: 14px;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #555;
+}
+
 .board {
   display: grid;
   gap: 4px;
-  max-width: 300px;
   margin: 20px auto;
+  max-width: 400px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .cell {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ccc;
-  border: 1px solid #999;
-  font-size: 14px;
+  background-color: #b0b0b0;
+  color: #333;
+  border: 1px solid #333;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.cell:hover {
+  background-color: #888;
+  transform: scale(1.05);
 }
 
 .cell.revealed {
-  background-color: #eee;
+  background-color: #fff;
+  color: #333;
   cursor: default;
+  font-weight: normal;
+  transform: none;
 }
 
+.cell.revealed span {
+  font-size: 20px;
+}
+
+/* Estilo para el modal de Game Over */
 .modal {
   position: fixed;
   top: 0;
@@ -31,12 +86,48 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
 }
 
 .modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
   text-align: center;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: shake 0.4s ease-in-out;
 }
+
+.modal-content h3 {
+  margin: 0;
+  color: #333;
+  font-size: 24px;
+  position: relative;
+  animation: bomb-explode 0.8s ease forwards;
+}
+
+.modal-content p {
+  color: #333;
+  font-size: 18px;
+}
+
+.modal-content button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: #555;
+}
+
+
+
