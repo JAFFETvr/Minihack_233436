@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
+import { Cell } from '../cell';
 
-interface Cell {
-  hasMine: boolean;
-  revealed: boolean;
-  adjacentMines: number;
-}
 
 @Component({
   selector: 'app-cuadricula',
@@ -30,7 +26,7 @@ export class CuadriculaComponent {
     this.gridTemplateColumns = `repeat(${this.cols}, auto)`;
     this.placeMines();
     this.calculateAdjacentMines();
-    this.gameOver = false; // Reiniciar el estado del juego al generar un nuevo tablero
+    this.gameOver = false; 
   }
 
   placeMines() {
@@ -69,23 +65,31 @@ export class CuadriculaComponent {
 
   revealCell(row: number, col: number) {
     if (this.board[row][col].revealed || this.gameOver) return;
-
+  
     if (this.board[row][col].hasMine) {
-      this.gameOver = true; // Activar el estado de Game Over
+      this.gameOver = true;
       return;
     }
-
+  
     this.board[row][col].revealed = true;
+  
     if (this.board[row][col].adjacentMines === 0) {
       for (let i = -1; i <= 1; i++) {
         for (let j = -1; j <= 1; j++) {
           const newRow = row + i;
           const newCol = col + j;
-          if (newRow >= 0 && newRow < this.rows && newCol >= 0 && newCol < this.cols) {
-            this.revealCell(newRow, newCol);
+  
+          if (
+            newRow >= 0 && newRow < this.rows &&
+            newCol >= 0 && newCol < this.cols &&
+            !this.board[newRow][newCol].revealed &&
+            !this.board[newRow][newCol].hasMine 
+          ) {
+            this.board[newRow][newCol].revealed = true;
           }
         }
       }
     }
   }
+  
 }
