@@ -7,14 +7,15 @@ import { Cell } from '../cell';
   styleUrls: ['./cuadricula.component.css']
 })
 export class CuadriculaComponent {
-  minesCount: number = 2;
+  minesCount: number = 5;
   board: Cell[][] = [];
   gridTemplateColumns: string = '';
   gameOver: boolean = false;
 
   generateBoard() {
-    const dimension = this.minesCount * 2;
-
+    const gridSize = Math.pow(this.minesCount, 2);
+    const dimension = Math.ceil(Math.sqrt(gridSize));
+    
     this.board = Array.from({ length: dimension }, () => 
       Array.from({ length: dimension }, () => ({
         hasMine: false,
