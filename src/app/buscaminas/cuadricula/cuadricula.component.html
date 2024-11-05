@@ -1,1 +1,28 @@
-<p>cuadricula works!</p>
+<h2>Buscaminas</h2>
+<div>
+  Minas: <input type="number" [(ngModel)]="minesCount" min="1" placeholder="Cantidad de Minas" />
+  <button (click)="generateBoard()">Generar Tablero</button>
+</div>
+
+<div class="board" [style.gridTemplateColumns]="gridTemplateColumns">
+  <ng-container *ngFor="let row of board; let rowIndex = index">
+    <button
+      *ngFor="let cell of row; let colIndex = index"
+      class="cell"
+      [class.revealed]="cell.revealed"
+      (click)="revealCell(rowIndex, colIndex)"
+    >
+      <span *ngIf="cell.revealed">
+        {{ cell.hasMine ? '💣' : (cell.adjacentMines > 0 ? cell.adjacentMines : '') }}
+      </span>
+    </button>
+  </ng-container>
+</div>
+
+<div *ngIf="gameOver" class="modal">
+  <div class="modal-content">
+    <h3>Game Over</h3>
+    <p>¡Has tocado una mina!</p>
+    <button (click)="generateBoard()">Intentar de nuevo</button>
+  </div>
+</div>
